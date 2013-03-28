@@ -1,4 +1,5 @@
-﻿using WinRTCore.Utilities;
+﻿using System.Windows.Threading;
+using WinRTCore.Utilities;
 
 namespace WinRTCore.MVVM
 {
@@ -25,22 +26,18 @@ namespace WinRTCore.MVVM
                 {
                     m_refIsLoading = value;
 
-                    // Get the current thread, and compare the dispatcher
-                    var coreWin = Windows.UI.Core.CoreWindow.GetForCurrentThread();
-                    if (coreWin != null && DispatcherService.Dispatcher == coreWin.Dispatcher)
+                    if (DispatcherService.Dispatcher != null)
                     {
-                        // We are already on the UI Thread, just throw the notification directly
-                        NotifyPropertyChanged("IsLoading");
-                        HandleIsLoadingChanged(value);
-                    }
-                    else
-                    {
-                        // Ensure the changes of the loading state can be done from any thread
-                        DispatcherService.RunOnDispatcher(delegate
+                        DispatcherService.Dispatcher.BeginInvoke(delegate
                         {
                             NotifyPropertyChanged("IsLoading");
                             HandleIsLoadingChanged(value);
                         });
+                    }
+                    else
+                    {
+                        NotifyPropertyChanged("IsLoading");
+                        HandleIsLoadingChanged(value);
                     }
                 }
             }

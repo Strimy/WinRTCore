@@ -1,6 +1,6 @@
 ﻿using System;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Data;
+using System.Windows;
+using System.Windows.Data;
 
 namespace WinRTCore
 {
@@ -8,7 +8,7 @@ namespace WinRTCore
     {
         public bool Inverted { get; set; }
 
-        public object Convert(object value, Type targetType, object parameter, string language)
+        public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
             if (Inverted)
             {
@@ -17,7 +17,7 @@ namespace WinRTCore
             return value != null;
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, string language)
+        public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
             return value is Visibility && (Visibility)value == Visibility.Visible;
         }

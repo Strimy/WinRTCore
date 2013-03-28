@@ -12,6 +12,7 @@ namespace WinRTCore.Utilities
     {
         // Field to simulate the timer
         ManualResetEventSlim m_refEvent = new ManualResetEventSlim();
+        
         private bool m_bIsRunning = false;
 
         /// <summary>

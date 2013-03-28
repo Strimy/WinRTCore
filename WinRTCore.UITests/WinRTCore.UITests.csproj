@@ -4,22 +4,22 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>8.0.30703</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{FF7C3F9C-15F4-4631-B1BA-EBA256141AB2}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <ProjectGuid>{FAB30010-4F10-443B-8C24-FC0B00643FC9}</ProjectGuid>
+    <OutputType>AppContainerExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>WinRTCore</RootNamespace>
-    <AssemblyName>WinRTCore</AssemblyName>
+    <RootNamespace>WinRTCore.UITests</RootNamespace>
+    <AssemblyName>WinRTCore.UITests</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{BC8A1FFA-BEE3-4634-8014-F334798102B3};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <PackageCertificateKeyFile>WinRTCore.UITests_TemporaryKey.pfx</PackageCertificateKeyFile>
     <SccProjectName>SAK</SccProjectName>
     <SccLocalPath>SAK</SccLocalPath>
     <SccAuxPath>SAK</SccAuxPath>
     <SccProvider>SAK</SccProvider>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -29,6 +29,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -104,38 +105,54 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
-    <Folder Include="Utilities\Storage\" />
+    <ProjectReference Include="..\WinRTCore\WinRTCore.csproj">
+      <Project>{ff7c3f9c-15f4-4631-b1ba-eba256141ab2}</Project>
+      <Name>WinRTCore</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Converters\BooleanToVisibilityConverter.cs" />
-    <Compile Include="Converters\NullToBooleanConverter.cs" />
-    <Compile Include="Converters\NullToVisibilityConverter.cs" />
-    <Compile Include="Helpers\ColorHelper.cs" />
-    <Compile Include="Helpers\DispatcherHelper.cs" />
-    <Compile Include="Helpers\MessageBoxHelper.cs" />
-    <Compile Include="Helpers\StringHelpers.cs" />
-    <Compile Include="MVVM\CommandBase.cs" />
-    <Compile Include="MVVM\DelegateCommand.cs" />
-    <Compile Include="MVVM\LoadableViewModel.cs" />
-    <Compile Include="MVVM\ViewModel.cs" />
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MainPage.xaml.cs">
+      <DependentUpon>MainPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UI\Behaviors\Behavior.cs" />
-    <Compile Include="UI\Behaviors\Interaction.cs" />
-    <Compile Include="UI\Behaviors\TypedBehavior.cs" />
-    <Compile Include="UI\CustomControls\ClickableContentPresenter.cs" />
-    <Compile Include="UI\CustomControls\ClickableItemsControl.cs" />
-    <Compile Include="UI\PropertyBridge\PropertyBridge.cs" />
-    <Compile Include="UI\PropertyBridge\PropertyBridgeBehaviorBase.cs" />
-    <Compile Include="UI\PropertyBridge\TypedPropertyBridgeBehaviorBase.cs" />
-    <Compile Include="UI\PropertyBridge\OnCaptureLostPropertyBridgeBehavior.cs" />
-    <Compile Include="Utilities\DispatcherService.cs" />
-    <Compile Include="Utilities\EmailComposeTask.cs" />
-    <Compile Include="Utilities\LittleWatson.cs" />
-    <Compile Include="Utilities\StorageService.cs" />
-    <Compile Include="Utilities\Tasks\NamedTask.cs" />
-    <Compile Include="Utilities\Tasks\TaskStacker.cs" />
-    <Compile Include="Utilities\Timer.cs" />
+    <Compile Include="Tests\PropertyBridge.xaml.cs">
+      <DependentUpon>PropertyBridge.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
+  <ItemGroup>
+    <AppxManifest Include="Package.appxmanifest">
+      <SubType>Designer</SubType>
+    </AppxManifest>
+    <None Include="WinRTCore.UITests_TemporaryKey.pfx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Assets\Logo.png" />
+    <Content Include="Assets\SmallLogo.png" />
+    <Content Include="Assets\SplashScreen.png" />
+    <Content Include="Assets\StoreLogo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Page Include="Common\StandardStyles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MainPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Tests\PropertyBridge.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '11.0' ">
     <VisualStudioVersion>11.0</VisualStudioVersion>
   </PropertyGroup>

@@ -1,0 +1,30 @@
+﻿<Page
+    x:Class="WinRTCore.UITests.Tests.PropertyBridge"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:WinRTCore.UITests.Tests"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:ui="using:WinRTCore.UI"
+    mc:Ignorable="d">
+
+    <Grid Background="{StaticResource ApplicationPageBackgroundThemeBrush}">
+        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Test PropertyBridge" VerticalAlignment="Top" FontSize="42" Height="115" Width="762" Margin="34,24,0,0"/>
+        <StackPanel>
+            <Slider Value="{Binding ModelValue, Mode=TwoWay}" />
+            <TextBlock><Run Text="Valeur du modèle : " /><Run Text="{Binding ModelValue}" /></TextBlock>
+
+            <ui:PropertyBridge x:Name="Bridge" ModelValue="{Binding ModelValue, Mode=TwoWay}" />
+
+            <TextBox Text="{Binding ElementName=Bridge, Path=UIBridgeValue, Mode=TwoWay}" />
+            <Slider Value="{Binding ElementName=Bridge, Path=UIBridgeValue, Mode=TwoWay}">
+                <ui:Interaction.Behaviors>
+                    <ui:OnCaptureLostPropertyBridgeBehavior />
+                </ui:Interaction.Behaviors>
+                <ui:PropertyBridge.Bridge>
+                    <Binding ElementName="Bridge" />
+                </ui:PropertyBridge.Bridge>
+            </Slider>
+        </StackPanel>
+    </Grid>
+</Page>

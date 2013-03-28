@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System.Runtime.Serialization;
 
 
 namespace WinRTCore.MVVM
@@ -6,6 +7,7 @@ namespace WinRTCore.MVVM
     /// <summary>
     /// A view model that implement the INotifyPropertyChanged interface
     /// </summary>
+    [DataContract]
     public class ViewModel : INotifyPropertyChanged
     {
 
